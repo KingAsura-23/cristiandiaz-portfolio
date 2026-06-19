@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectre Attack Lab — Cristian Diaz</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+</head>
+<body class="cyber-page">
+
+    <nav id="site-nav" class="site-nav" data-root="../../" data-page="cyber"></nav>
+
+    <header class="container" style="padding-top: 2rem;">
+        <div class="writeup-breadcrumb reveal">
+            <a href="../index.html">cybersecurity</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <a href="index.html">labs</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <span>spectre</span>
+        </div>
+
+        <section class="writeup-hero reveal">
+            <div class="writeup-hero-head">
+                <span class="tag cyber">Hardware Security</span>
+                <span class="diff-badge medium">SEED Lab</span>
+            </div>
+            <h1>Spectre Attack Lab</h1>
+            <p class="writeup-hero-sub">
+                SEED Labs exercise on branch predictor poisoning and cache side channels — leaking secrets by tricking the CPU into speculatively executing code that should never run.
+            </p>
+        </section>
+
+        <div class="writeup-info reveal" data-delay="80">
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Course</span>
+                <span class="writeup-info-value">CSCI-401</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Institution</span>
+                <span class="writeup-info-value">John Jay College</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Completed</span>
+                <span class="writeup-info-value">June 2026</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Environment</span>
+                <span class="writeup-info-value">SEED Ubuntu VM</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <article class="writeup-article reveal" data-delay="120">
+
+                <h2>Overview</h2>
+                <p>
+                    Spectre (2018) affects Intel, AMD, and ARM processors. Unlike Meltdown's direct kernel read, Spectre weaponizes <strong>branch prediction</strong>: the CPU speculatively executes code paths that violate bounds checks, then leaks the secret through cache timing before the misprediction is discarded.
+                </p>
+                <p>
+                    Attack flow: train the branch predictor with valid inputs → submit a malicious out-of-bounds index → CPU transiently accesses secret data and touches a probe array → attacker reads cache timing to recover the byte.
+                </p>
+
+                <h2>Task 1 — Cache vs Memory Timing</h2>
+                <p>
+                    Ran <code>CacheTime</code> to baseline L1 cache behavior. Cached indices returned 42–63 cycles; uncached reads ranged from 231 to 882+ cycles. Set threshold at <strong>~80 cycles</strong> for hit detection.
+                </p>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/spectre-task1.png" alt="CacheTime output showing cached vs uncached access latency" loading="lazy">
+                    <figcaption>Task 1 — CacheTime: 42–63 cycles (cached) vs 231–882+ cycles (uncached)</figcaption>
+                </figure>
+
+                <h2>Task 2 — Cache as Side Channel</h2>
+                <p>
+                    <code>Flush+Reload</code> successfully recovered secret value <code>94</code>:
+                </p>
+                <pre data-lang="text"><code>array[94*4096 + 1024] is in cache.
+The Secret = 94.</code></pre>
+                <p>
+                    Minor noise (95, 97) appeared but the target value was clearly identifiable — demonstrating that attackers never need direct memory reads.
+                </p>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/spectre-task2.png" alt="Flush+Reload output showing secret value 94 in cache" loading="lazy">
+                    <figcaption>Task 2 — Flush+Reload: The Secret = 94</figcaption>
+                </figure>
+
+                <h2>Task 3 — Out-of-Bounds Access Test</h2>
+                <p>
+                    Fed the victim function an index outside its allowed range. Despite bounds checking in software, speculative execution still transiently accessed the secret and left cache traces — the core Spectre insight.
+                </p>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/spectre-task3.png" alt="Out-of-bounds access test leaking secret through cache side channel" loading="lazy">
+                    <figcaption>Task 3 — Out-of-bounds index leaks secret via speculative execution</figcaption>
+                </figure>
+
+                <h2>Task 4 — Full Spectre Attack</h2>
+                <p>
+                    Trained the branch predictor with legitimate calls, then passed a malicious index (<code>-8208</code>) to force speculative out-of-bounds access. Initial single-run output was noisy:
+                </p>
+                <pre data-lang="text"><code>Reading secret value at index -8208
+The secret value is 208
+The number of hits is 918</code></pre>
+                <p>
+                    Target secret was ASCII <code>83</code> (<code>'S'</code>). Ran the attack in a loop (100 iterations) — recovered on iteration 98. Confirmed again on a manual third run with clean output showing <code>secret value is 83(S)</code>.
+                </p>
+                <p>
+                    High hit counts (918) made results significantly more reliable than single-shot attempts. VM timing noise remained the main challenge.
+                </p>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/spectre-task4.png" alt="Initial Spectre attack run with high hit count output" loading="lazy">
+                    <figcaption>Task 4 — First Spectre run: secret value 208, 918 cache hits</figcaption>
+                </figure>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/spectre-task5.png" alt="Spectre attack successfully recovering secret value 83 (S)" loading="lazy">
+                    <figcaption>Task 4 — Successful recovery: secret value is 83 (S)</figcaption>
+                </figure>
+
+                <h2>Key Takeaways</h2>
+                <ul>
+                    <li>Bounds checks in software do not stop speculative execution — the CPU may run unsafe code for a brief window.</li>
+                    <li>Branch predictor training is the setup phase; the malicious index is the trigger.</li>
+                    <li>Statistical repetition (loop + hit counting) improves reliability when single runs are noisy.</li>
+                    <li>Spectre is harder to patch than Meltdown because it targets performance features (branch prediction) used by virtually every modern CPU.</li>
+                    <li>Security vulnerabilities can originate in hardware design, not just application code.</li>
+                </ul>
+
+                <h2>Tools &amp; Techniques</h2>
+                <ul>
+                    <li>SEED Ubuntu VM · GCC · C victim/spectre attack code</li>
+                    <li>Flush+Reload probe array · cache hit threshold tuning</li>
+                    <li>Branch predictor poisoning via repeated valid calls</li>
+                    <li>Iterative attack script (100-run loop for secret recovery)</li>
+                </ul>
+
+                <a href="../../assets/reports/spectre-lab-report.docx" class="lab-report-download" download>
+                    ↓ Download original lab report (.docx)
+                </a>
+
+            </article>
+
+            <nav class="writeup-nav reveal" data-delay="160">
+                <a href="meltdown.html" class="writeup-nav-link">
+                    <span class="writeup-nav-label">← previous lab</span>
+                    <span class="writeup-nav-title">Meltdown Attack Lab</span>
+                </a>
+                <a href="index.html" class="writeup-nav-link next">
+                    <span class="writeup-nav-label">all labs →</span>
+                    <span class="writeup-nav-title">Back to index</span>
+                </a>
+            </nav>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">&copy; 2026 Cristian Diaz · CSCI-401 lab report</div>
+    </footer>
+
+    <script src="../../assets/js/nav.js"></script>
+    <script src="../../assets/js/fx.js"></script>
+</body>
+</html>

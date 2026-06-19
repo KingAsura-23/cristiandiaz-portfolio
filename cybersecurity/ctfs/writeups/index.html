@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Writeups — Cristian Diaz</title>
+    <link rel="stylesheet" href="../../../assets/css/global.css">
+</head>
+<body class="cyber-page">
+
+    <nav id="site-nav" class="site-nav" data-root="../../../" data-page="cyber"></nav>
+
+    <header class="page-header container reveal">
+        <div class="writeup-breadcrumb">
+            <a href="../../index.html">cybersecurity</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <a href="../index.html">ctfs</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <span>writeups</span>
+        </div>
+        <h1>CTF Writeups</h1>
+        <p>Detailed solve breakdowns &mdash; how I thought through select challenges, what tools I reached for, and what I took away.</p>
+    </header>
+
+    <!-- ── Stats ── -->
+    <section class="section" style="padding-top: 1rem;">
+        <div class="container">
+            <div class="writeup-stats reveal">
+                <div class="writeup-stat">
+                    <span class="writeup-stat-value"><span data-count="2">0</span></span>
+                    <span class="writeup-stat-label">Published</span>
+                </div>
+                <div class="writeup-stat">
+                    <span class="writeup-stat-value"><span data-count="2">0</span></span>
+                    <span class="writeup-stat-label">Categories</span>
+                </div>
+                <div class="writeup-stat">
+                    <span class="writeup-stat-value"><span data-count="1">0</span></span>
+                    <span class="writeup-stat-label">Platforms</span>
+                </div>
+                <div class="writeup-stat">
+                    <span class="writeup-stat-value" style="color: var(--cyber-warn);"><span data-count="83">0</span></span>
+                    <span class="writeup-stat-label">Solves Total</span>
+                </div>
+            </div>
+
+            <!-- Filters (currently visual only - wire up later if needed) -->
+            <div class="filter-bar reveal" data-delay="80">
+                <span class="filter-bar-label">// filter:</span>
+                <button type="button" class="filter-chip active" data-filter="all">
+                    All <span class="filter-count">2</span>
+                </button>
+                <button type="button" class="filter-chip" data-filter="crypto">
+                    Crypto <span class="filter-count">1</span>
+                </button>
+                <button type="button" class="filter-chip" data-filter="reverse">
+                    Reverse <span class="filter-count">1</span>
+                </button>
+                <button type="button" class="filter-chip" data-filter="web">
+                    Web <span class="filter-count">0</span>
+                </button>
+                <button type="button" class="filter-chip" data-filter="forensic">
+                    Forensic <span class="filter-count">0</span>
+                </button>
+                <button type="button" class="filter-chip" data-filter="binary">
+                    Binary <span class="filter-count">0</span>
+                </button>
+                <button type="button" class="filter-chip" data-filter="general">
+                    General <span class="filter-count">0</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Grid ── -->
+    <section class="section" style="padding-top: 0.5rem;">
+        <div class="container">
+            <div class="writeup-grid">
+
+                <!-- Writeup 1 -->
+                <a href="writeup-sample-1.html" class="writeup-card reveal" data-delay="0" data-category="crypto" data-difficulty="easy">
+                    <div class="writeup-card-head">
+                        <span class="writeup-platform">
+                            <span class="platform-mark">C</span>
+                            CyLab Academy
+                        </span>
+                        <span class="diff-badge easy">Easy</span>
+                    </div>
+                    <h3>Sample Crypto Challenge</h3>
+                    <div class="writeup-card-meta">
+                        <span class="tag cyber">crypto</span>
+                        <span class="tag">python</span>
+                        <span class="tag">200 pts</span>
+                    </div>
+                    <p class="writeup-card-summary">
+                        A walkthrough of the recon, the approach I tried first, and how I pivoted to find the flag. Replace this summary when you fill in the writeup.
+                    </p>
+                    <div class="writeup-card-footer">
+                        <span>2026-06-15</span>
+                        <span class="writeup-card-cta">read writeup &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Writeup 2 -->
+                <a href="writeup-sample-2.html" class="writeup-card reveal" data-delay="100" data-category="reverse" data-difficulty="medium">
+                    <div class="writeup-card-head">
+                        <span class="writeup-platform">
+                            <span class="platform-mark">C</span>
+                            CyLab Academy
+                        </span>
+                        <span class="diff-badge medium">Medium</span>
+                    </div>
+                    <h3>Sample Reverse Engineering Challenge</h3>
+                    <div class="writeup-card-meta">
+                        <span class="tag cyber">reverse</span>
+                        <span class="tag">ghidra</span>
+                        <span class="tag">gdb</span>
+                        <span class="tag">300 pts</span>
+                    </div>
+                    <p class="writeup-card-summary">
+                        Walks through static analysis in Ghidra, identifying the check function, and crafting input that bypasses the validation. Replace with your real notes.
+                    </p>
+                    <div class="writeup-card-footer">
+                        <span>2026-06-10</span>
+                        <span class="writeup-card-cta">read writeup &rarr;</span>
+                    </div>
+                </a>
+
+                <!-- Placeholder hint for future writeups -->
+                <div class="writeup-card reveal" data-delay="200" style="border-style: dashed; opacity: 0.55;">
+                    <div class="writeup-card-head">
+                        <span class="writeup-platform">
+                            <span class="platform-mark other">+</span>
+                            COMING SOON
+                        </span>
+                        <span class="diff-badge hard">Hard</span>
+                    </div>
+                    <h3>Your Next Writeup</h3>
+                    <div class="writeup-card-meta">
+                        <span class="tag">tbd</span>
+                    </div>
+                    <p class="writeup-card-summary">
+                        Duplicate one of the writeup HTML files in this folder, rename it, fill in the sections, and add a card here.
+                    </p>
+                    <div class="writeup-card-footer">
+                        <span>draft</span>
+                        <span class="writeup-card-cta">&middot;</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Back ── -->
+    <section class="section" style="padding-top: 2rem;">
+        <div class="container reveal">
+            <a href="../index.html" class="btn btn-outline">&larr; Back to CTFs</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">&copy; 2026 Cristian Diaz &middot; writeups indexed</div>
+    </footer>
+
+    <script src="../../../assets/js/nav.js"></script>
+    <script src="../../../assets/js/fx.js"></script>
+</body>
+</html>

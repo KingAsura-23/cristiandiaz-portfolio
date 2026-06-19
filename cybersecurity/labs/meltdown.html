@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meltdown Attack Lab — Cristian Diaz</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+</head>
+<body class="cyber-page">
+
+    <nav id="site-nav" class="site-nav" data-root="../../" data-page="cyber"></nav>
+
+    <header class="container" style="padding-top: 2rem;">
+        <div class="writeup-breadcrumb reveal">
+            <a href="../index.html">cybersecurity</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <a href="index.html">labs</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <span>meltdown</span>
+        </div>
+
+        <section class="writeup-hero reveal">
+            <div class="writeup-hero-head">
+                <span class="tag cyber">Hardware Security</span>
+                <span class="diff-badge medium">SEED Lab</span>
+            </div>
+            <h1>Meltdown Attack Lab</h1>
+            <p class="writeup-hero-sub">
+                SEED Labs exercise on CPU speculative execution and cache side channels — leaking kernel memory from user space without direct access.
+            </p>
+        </section>
+
+        <div class="writeup-info reveal" data-delay="80">
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Course</span>
+                <span class="writeup-info-value">CSCI-401</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Institution</span>
+                <span class="writeup-info-value">John Jay College</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Completed</span>
+                <span class="writeup-info-value">June 2026</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Environment</span>
+                <span class="writeup-info-value">SEED Ubuntu VM</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <article class="writeup-article reveal" data-delay="120">
+
+                <h2>Overview</h2>
+                <p>
+                    Meltdown (2018) exploits speculative execution on modern Intel processors to read kernel memory from an unprivileged user program. The OS normally isolates user and kernel address spaces, but the CPU may transiently execute a forbidden load before the fault is raised — leaving measurable traces in the L1 cache.
+                </p>
+                <p>
+                    This lab walked through the full attack chain: cache timing fundamentals, Flush+Reload side channels, kernel module setup, exception handling, and finally assembling a basic Meltdown exploit.
+                </p>
+
+                <h2>Task 1 — Cache vs Memory Timing</h2>
+                <p>
+                    Ran <code>CacheTime.c</code> to compare access latency for cached vs uncached array elements. Cached indices (e.g. <code>array[3*4096]</code>, <code>array[7*4096]</code>) returned ~42 CPU cycles; uncached reads exceeded 1000 cycles.
+                </p>
+                <ul>
+                    <li>Established cache hit threshold at <strong>80 CPU cycles</strong></li>
+                    <li>Confirmed timing differences are usable as a side channel despite VM noise</li>
+                </ul>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/meltdown-task1.png" alt="CacheTime.c output showing cached vs uncached array access cycles" loading="lazy">
+                    <figcaption>Task 1 — CacheTime.c: cached indices ~42 cycles vs uncached 1000+ cycles</figcaption>
+                </figure>
+
+                <h2>Task 2 — Flush+Reload Side Channel</h2>
+                <p>
+                    Executed <code>FlushReload.c</code> to infer a secret value (target: <code>94</code>) by observing which probe array index loaded fastest after a flush. Output included noise (90–96) due to VM timing instability, but the correct index was recoverable.
+                </p>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/meltdown-task2.png" alt="FlushReload side channel output recovering secret value 94" loading="lazy">
+                    <figcaption>Task 2 — Flush+Reload: secret 94 recovered with some cache noise</figcaption>
+                </figure>
+
+                <h2>Task 3 — Kernel Secret Placement</h2>
+                <p>
+                    Built and loaded <code>MeltdownKernel.ko</code> with <code>make</code> and <code>insmod</code>. Retrieved the secret kernel address via:
+                </p>
+                <pre data-lang="bash"><code>dmesg | grep 'secret data address'
+# 0x0000000034a395ee</code></pre>
+                <p>
+                    Learned kernel module lifecycle — including resolving <code>insmod: File exists</code> with <code>rmmod MeltdownKernel</code> before reloading.
+                </p>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/meltdown-task3.png" alt="MeltdownKernel.ko loaded and secret kernel address from dmesg" loading="lazy">
+                    <figcaption>Task 3 — Kernel module loaded; secret address 0x0000000034a395ee from dmesg</figcaption>
+                </figure>
+
+                <h2>Task 4 — Direct Kernel Read (Blocked)</h2>
+                <p>
+                    A user-space pointer dereference to kernel memory caused an immediate segmentation fault — confirming OS-enforced isolation and motivating the speculative side-channel approach.
+                </p>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/meltdown-task4.png" alt="Segmentation fault when reading kernel memory from user space" loading="lazy">
+                    <figcaption>Task 4 — Direct kernel read blocked with segmentation fault</figcaption>
+                </figure>
+
+                <h2>Task 5 — Exception Handling</h2>
+                <p>
+                    Used <code>SIGSEGV</code> with <code>sigsetjmp()</code> / <code>siglongjmp()</code> to recover from illegal memory access instead of crashing:
+                </p>
+                <blockquote>
+                    Memory access violation! Program continues to execute.
+                </blockquote>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/meltdown-task5.png" alt="SIGSEGV handler catching memory access violation and continuing execution" loading="lazy">
+                    <figcaption>Task 5 — SIGSEGV handler recovers from illegal access</figcaption>
+                </figure>
+
+                <h2>Task 6 — Out-of-Order / Speculative Execution</h2>
+                <p>
+                    <code>MeltdownExperiment.c</code> demonstrated that even after a fault, speculative instructions left cache footprints:
+                </p>
+                <pre data-lang="text"><code>Memory access violation!
+array[7*4096 + 1024] is in cache.</code></pre>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/meltdown-task6.png" alt="MeltdownExperiment showing cache footprint after speculative execution" loading="lazy">
+                    <figcaption>Task 6 — Speculative execution leaves cache trace despite fault</figcaption>
+                </figure>
+
+                <h2>Task 7 — Basic Meltdown Attack</h2>
+                <p>
+                    Modified the exploit so array access depended on the leaked kernel byte (not a hardcoded index) and added inline assembly to extend the speculative window. Attack output remained noisy under VM + CPU mitigations (KPTI, retpoline patches), but cache hits on the expected probe line appeared consistently — validating the attack concept.
+                </p>
+                <figure class="writeup-figure">
+                    <img src="../../assets/img/labs/meltdown-task7.png" alt="Basic Meltdown attack output with cache hits on probe array" loading="lazy">
+                    <figcaption>Task 7 — Basic Meltdown attack: consistent cache hits on probe line</figcaption>
+                </figure>
+
+                <h2>Key Takeaways</h2>
+                <ul>
+                    <li>Side-channel attacks infer secrets from timing and cache state, not direct reads.</li>
+                    <li>Speculative execution can transiently violate memory isolation before the CPU rolls back.</li>
+                    <li>VM environments and modern CPU patches add noise and reduce exploit reliability — but the underlying vulnerability class is real.</li>
+                    <li>Defense requires hardware, OS, and compiler mitigations working together (KPTI, microcode updates, etc.).</li>
+                </ul>
+
+                <h2>Tools &amp; Techniques</h2>
+                <ul>
+                    <li>SEED Ubuntu VM · GCC · kernel modules (<code>insmod</code> / <code>rmmod</code>)</li>
+                    <li>Flush+Reload cache probing · <code>rdtsc</code>-style cycle counting</li>
+                    <li>Signal-based exception handling (<code>SIGSEGV</code>, <code>sigsetjmp</code>)</li>
+                </ul>
+
+                <a href="../../assets/reports/meltdown-lab-report.odt" class="lab-report-download" download>
+                    ↓ Download original lab report (.odt)
+                </a>
+
+            </article>
+
+            <nav class="writeup-nav reveal" data-delay="160">
+                <a href="index.html" class="writeup-nav-link">
+                    <span class="writeup-nav-label">← all labs</span>
+                    <span class="writeup-nav-title">Back to index</span>
+                </a>
+                <a href="spectre.html" class="writeup-nav-link next">
+                    <span class="writeup-nav-label">next lab →</span>
+                    <span class="writeup-nav-title">Spectre Attack Lab</span>
+                </a>
+            </nav>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">&copy; 2026 Cristian Diaz · CSCI-401 lab report</div>
+    </footer>
+
+    <script src="../../assets/js/nav.js"></script>
+    <script src="../../assets/js/fx.js"></script>
+</body>
+</html>

@@ -69,18 +69,30 @@
             <div class="lab-category reveal">
                 <h3>Hardware Security</h3>
                 <div class="card-grid card-grid-2">
-                    <div class="card lab-card">
+                    <a href="spectre.html" class="card lab-card">
                         <h3>Spectre</h3>
-                        <p>Side-channel attack leveraging speculative execution in modern CPUs.</p>
-                        <p class="lab-meta">Tools: SEED Ubuntu · C</p>
-                        <span class="status-badge status-progress">In Progress</span>
-                    </div>
-                    <div class="card lab-card">
+                        <p>Branch-predictor training + Flush+Reload side channel to leak secret data past bounds checks via speculative execution.</p>
+                        <div class="lab-card-tasks">
+                            <span class="tag cyber">Cache timing</span>
+                            <span class="tag cyber">Flush+Reload</span>
+                            <span class="tag cyber">Branch predictor</span>
+                        </div>
+                        <p class="lab-meta">CSCI-401 · SEED Ubuntu · C · Jun 2026</p>
+                        <span class="status-badge status-complete">Completed</span>
+                        <span class="lab-card-link">read lab report →</span>
+                    </a>
+                    <a href="meltdown.html" class="card lab-card">
                         <h3>Meltdown</h3>
-                        <p>Reading kernel memory from user space via out-of-order execution.</p>
-                        <p class="lab-meta">Tools: SEED Ubuntu · C</p>
-                        <span class="status-badge status-planned">Planned</span>
-                    </div>
+                        <p>Kernel memory leak from user space using out-of-order execution, SIGSEGV recovery, and cache side channels.</p>
+                        <div class="lab-card-tasks">
+                            <span class="tag cyber">Kernel module</span>
+                            <span class="tag cyber">SIGSEGV</span>
+                            <span class="tag cyber">Speculative exec</span>
+                        </div>
+                        <p class="lab-meta">CSCI-401 · SEED Ubuntu · C · Jun 2026</p>
+                        <span class="status-badge status-complete">Completed</span>
+                        <span class="lab-card-link">read lab report →</span>
+                    </a>
                 </div>
             </div>
 
