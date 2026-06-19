@@ -1379,6 +1379,42 @@ img {
     color: var(--text-dim);
 }
 
+.lab-card-tasks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.75rem 0 0.5rem;
+}
+
+.lab-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--cyber-primary);
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity var(--t-fast);
+}
+
+.lab-card-link:hover {
+    opacity: 1;
+}
+
+a.lab-card {
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--t), border-color var(--t), box-shadow var(--t);
+}
+
+a.lab-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--cyber-primary);
+    box-shadow: 0 12px 32px rgba(0, 255, 156, 0.1);
+}
+
 .status-badge {
     display: inline-flex;
     align-items: center;
@@ -3246,6 +3282,54 @@ a.kpi-card:hover .kpi-link-cta {
     transform: translateY(-1px);
 }
 
+/* ─ Per-platform mini-stats row (rank, rooms, badges, etc.) ─ */
+.platform-mini-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 0.85rem 0 0.4rem;
+    padding-top: 0.85rem;
+    border-top: 1px dashed var(--cyber-border);
+}
+
+.platform-mini-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--cyber-border);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1;
+}
+
+.platform-mini-stat strong {
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+.platform-mini-stat .mini-icon {
+    font-size: 0.85rem;
+    line-height: 1;
+    color: var(--text-dim);
+}
+
+.platform-mini-stat.rank {
+    border-color: rgba(255, 200, 87, 0.4);
+    background: rgba(255, 200, 87, 0.06);
+}
+
+.platform-mini-stat.rank strong,
+.platform-mini-stat.rank .mini-icon {
+    color: var(--cyber-warn);
+}
+
+.platform-mini-stat.rooms .mini-icon { color: var(--cyber-accent); }
+.platform-mini-stat.badges .mini-icon { color: var(--cyber-accent-2); }
+
 /* ─ Writeups link inside CyLab platform card ─ */
 .kpi-writeups-link {
     display: flex;
@@ -3533,6 +3617,50 @@ a.kpi-card:hover .kpi-link-cta {
     font-weight: 700;
     margin-bottom: 0.3rem;
     letter-spacing: 0.1em;
+}
+
+.writeup-figure {
+    margin: 1.2rem 0 1.5rem;
+    border: 1px solid var(--cyber-border);
+    border-radius: var(--radius);
+    background: rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+}
+
+.writeup-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid var(--cyber-border);
+}
+
+.writeup-figure figcaption {
+    padding: 0.65rem 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+}
+
+.lab-report-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding: 0.65rem 1.1rem;
+    border: 1px solid rgba(0, 255, 156, 0.35);
+    border-radius: 999px;
+    background: rgba(0, 255, 156, 0.06);
+    color: var(--cyber-primary);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-decoration: none;
+    transition: background var(--t-fast), border-color var(--t-fast);
+}
+
+.lab-report-download:hover {
+    background: rgba(0, 255, 156, 0.12);
+    border-color: var(--cyber-primary);
 }
 
 /* Prev/next nav */
