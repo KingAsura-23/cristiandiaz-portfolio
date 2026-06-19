@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Labs — Cristian Diaz</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+</head>
+<body class="cyber-page">
+
+    <nav id="site-nav" class="site-nav" data-root="../../" data-page="cyber"></nav>
+
+    <header class="page-header container reveal">
+        <h1>Security Labs</h1>
+        <p>SEED Labs &amp; hands-on exercises by category</p>
+    </header>
+
+    <section class="section">
+        <div class="container">
+
+            <div class="lab-category reveal">
+                <h3>Web Security</h3>
+                <div class="card-grid card-grid-2">
+                    <div class="card lab-card">
+                        <h3>XSS</h3>
+                        <p>Cross-site scripting attacks &amp; defenses using stored, reflected, and DOM-based vectors.</p>
+                        <p class="lab-meta">Tools: Burp Suite · DevTools · SEED Ubuntu</p>
+                        <span class="status-badge status-complete">Completed</span>
+                    </div>
+                    <div class="card lab-card">
+                        <h3>CSRF</h3>
+                        <p>Cross-site request forgery exploitation and token-based mitigation strategies.</p>
+                        <p class="lab-meta">Tools: Burp Suite · Python · HTML forms</p>
+                        <span class="status-badge status-complete">Completed</span>
+                    </div>
+                    <div class="card lab-card">
+                        <h3>SQL Injection</h3>
+                        <p>Extracting data via UNION-based and blind SQL injection on vulnerable web apps.</p>
+                        <p class="lab-meta">Tools: sqlmap · MySQL · SEED WebGoat</p>
+                        <span class="status-badge status-complete">Completed</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lab-category reveal">
+                <h3>System Security</h3>
+                <div class="card-grid card-grid-2">
+                    <div class="card lab-card">
+                        <h3>Buffer Overflow</h3>
+                        <p>Stack-based buffer overflow exploitation on 32-bit Linux binaries.</p>
+                        <p class="lab-meta">Tools: GDB · Python · SEED Ubuntu</p>
+                        <span class="status-badge status-complete">Completed</span>
+                    </div>
+                    <div class="card lab-card">
+                        <h3>Return-to-libc</h3>
+                        <p>Bypassing NX/DEP by redirecting execution to libc functions.</p>
+                        <p class="lab-meta">Tools: GDB · objdump · SEED Ubuntu</p>
+                        <span class="status-badge status-complete">Completed</span>
+                    </div>
+                    <div class="card lab-card">
+                        <h3>Shellshock</h3>
+                        <p>Exploiting Bash environment variable vulnerability (CVE-2014-6271).</p>
+                        <p class="lab-meta">Tools: curl · Apache · SEED Ubuntu</p>
+                        <span class="status-badge status-progress">In Progress</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lab-category reveal">
+                <h3>Hardware Security</h3>
+                <div class="card-grid card-grid-2">
+                    <div class="card lab-card">
+                        <h3>Spectre</h3>
+                        <p>Side-channel attack leveraging speculative execution in modern CPUs.</p>
+                        <p class="lab-meta">Tools: SEED Ubuntu · C</p>
+                        <span class="status-badge status-progress">In Progress</span>
+                    </div>
+                    <div class="card lab-card">
+                        <h3>Meltdown</h3>
+                        <p>Reading kernel memory from user space via out-of-order execution.</p>
+                        <p class="lab-meta">Tools: SEED Ubuntu · C</p>
+                        <span class="status-badge status-planned">Planned</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lab-category reveal">
+                <h3>Cryptography</h3>
+                <div class="card-grid card-grid-2">
+                    <div class="card lab-card">
+                        <h3>RSA</h3>
+                        <p>Key generation, encryption/decryption, and common RSA attack vectors.</p>
+                        <p class="lab-meta">Tools: OpenSSL · Python · SEED Ubuntu</p>
+                        <span class="status-badge status-complete">Completed</span>
+                    </div>
+                    <div class="card lab-card">
+                        <h3>PKI</h3>
+                        <p>Certificate authorities, chain of trust, and X.509 certificate management.</p>
+                        <p class="lab-meta">Tools: OpenSSL · SEED Ubuntu</p>
+                        <span class="status-badge status-complete">Completed</span>
+                    </div>
+                    <div class="card lab-card">
+                        <h3>TLS</h3>
+                        <p>Handshake analysis, cipher suites, and common TLS misconfigurations.</p>
+                        <p class="lab-meta">Tools: Wireshark · OpenSSL · testssl.sh</p>
+                        <span class="status-badge status-progress">In Progress</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">&copy; 2026 Cristian Diaz</div>
+    </footer>
+
+    <script src="../../assets/js/nav.js"></script>
+    <script src="../../assets/js/fx.js"></script>
+</body>
+</html>

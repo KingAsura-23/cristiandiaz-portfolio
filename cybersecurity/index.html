@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Ops Dashboard — Cristian Diaz</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+</head>
+<body class="cyber-page">
+
+    <nav id="site-nav" class="site-nav" data-root="../" data-page="cyber"></nav>
+
+    <!-- ── Ops Console ── -->
+    <section class="ops-console">
+        <div class="container">
+            <div class="ops-header reveal">
+                <div class="ops-title">
+                    <span class="ops-badge">// security_ops · console</span>
+                    <h1>OPERATOR <span class="gradient">DASHBOARD</span></h1>
+                    <p class="ops-subtitle">cristian@diaz:~/sec_ops$ status --all <span class="cur">_</span></p>
+                </div>
+                <div class="ops-clock">
+                    <span class="ops-clock-label">SYS_TIME</span>
+                    <span class="ops-clock-value" data-clock>00:00:00</span>
+                    <span class="ops-clock-date" data-date>2026-06-18</span>
+                </div>
+            </div>
+
+            <div class="status-strip reveal" data-delay="120">
+                <div class="status-cell">
+                    <span class="status-cell-label">CLEARANCE</span>
+                    <span class="status-cell-value"><span class="led led-green"></span> STUDENT_OPERATOR</span>
+                </div>
+                <div class="status-cell">
+                    <span class="status-cell-label">NODE</span>
+                    <span class="status-cell-value">JOHN_JAY_COLLEGE</span>
+                </div>
+                <div class="status-cell">
+                    <span class="status-cell-label">UPTIME</span>
+                    <span class="status-cell-value" data-uptime="142d 09:43:12">142d 09:43:12</span>
+                </div>
+                <div class="status-cell">
+                    <span class="status-cell-label">THREAT_LEVEL</span>
+                    <span class="status-cell-value"><span class="led led-green"></span> LOW</span>
+                </div>
+                <div class="status-cell">
+                    <span class="status-cell-label">STATUS</span>
+                    <span class="status-cell-value"><span class="led led-green pulsing"></span> ACTIVE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Mission Metrics (KPIs) ── -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Mission Metrics</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card reveal" data-delay="0">
+                    <div class="kpi-header">
+                        <span class="kpi-label">LABS COMPLETED</span>
+                        <span class="kpi-trend">+3 this month</span>
+                    </div>
+                    <span class="kpi-value"><span data-count="20" data-suffix="+">0</span></span>
+                    <div class="progress-track"><div class="progress-fill" data-fill="70"></div></div>
+                    <span class="kpi-foot">70% of SEED curriculum</span>
+                </div>
+                <a href="ctfs/index.html" class="kpi-card reveal" data-delay="80">
+                    <div class="kpi-header">
+                        <span class="kpi-label">CTF CHALLENGES</span>
+                        <span class="kpi-trend cyan">5 platforms</span>
+                    </div>
+                    <span class="kpi-value cyan"><span data-count="107">0</span></span>
+                    <div class="progress-track"><div class="progress-fill cyan" data-fill="82"></div></div>
+                    <span class="kpi-foot">CyLab Academy · THM · OTW · pwn.college · others</span>
+                    <span class="kpi-link-cta">view breakdown →</span>
+                </a>
+                <div class="kpi-card reveal" data-delay="160">
+                    <div class="kpi-header">
+                        <span class="kpi-label">CERTIFICATIONS</span>
+                        <span class="kpi-trend warn">in-flight</span>
+                    </div>
+                    <span class="kpi-value"><span data-count="1">0</span><span style="font-size:1.1rem;opacity:.6">/3</span></span>
+                    <div class="progress-track"><div class="progress-fill warn" data-fill="33"></div></div>
+                    <span class="kpi-foot">Security+ → ISC2 CC → CCNA</span>
+                </div>
+                <div class="kpi-card reveal" data-delay="240">
+                    <div class="kpi-header">
+                        <span class="kpi-label">WRITEUPS PUBLISHED</span>
+                        <span class="kpi-trend cyan">+1 draft</span>
+                    </div>
+                    <span class="kpi-value cyan"><span data-count="3">0</span></span>
+                    <div class="progress-track"><div class="progress-fill cyan" data-fill="45"></div></div>
+                    <span class="kpi-foot">research · case studies · postmortems</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Operational Modules ── -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Operational Modules</h2>
+            <div class="module-grid">
+                <a href="labs/index.html" class="module-card reveal" data-delay="0">
+                    <div class="module-head">
+                        <div class="module-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6L4 18a2 2 0 002 3h12a2 2 0 002-3L15 8V2"/><path d="M8 2h8"/><path d="M7 14h10"/></svg>
+                        </div>
+                        <span class="status-badge status-complete">ACTIVE</span>
+                    </div>
+                    <h3>Labs</h3>
+                    <p>SEED &amp; hands-on security exercises across web, system, crypto, hardware.</p>
+                    <div class="module-meta">
+                        <span><strong>20+</strong> completed</span>
+                        <span class="meta-divider"></span>
+                        <span>last: <strong>2d ago</strong></span>
+                    </div>
+                    <span class="module-cta">access module →</span>
+                </a>
+
+                <a href="ctfs/index.html" class="module-card reveal" data-delay="80">
+                    <div class="module-head">
+                        <div class="module-icon cyan">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4M4 14V4h13l-2 4 2 4H4"/></svg>
+                        </div>
+                        <span class="status-badge status-progress">IN PROGRESS</span>
+                    </div>
+                    <h3>CTFs</h3>
+                    <p>Challenges across CyLab Academy (picoCTF), THM, OverTheWire, pwn.college and more.</p>
+                    <div class="module-meta">
+                        <span><strong>107</strong> solved</span>
+                        <span class="meta-divider"></span>
+                        <span><strong>5</strong> platforms</span>
+                    </div>
+                    <span class="module-cta">access module →</span>
+                </a>
+
+                <a href="certifications/index.html" class="module-card reveal" data-delay="160">
+                    <div class="module-head">
+                        <div class="module-icon warn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M9 13.5l-2.5 8L12 18l5.5 3.5L15 13.5"/></svg>
+                        </div>
+                        <span class="status-badge status-progress">CANDIDATE</span>
+                    </div>
+                    <h3>Certifications</h3>
+                    <p>Security+ candidate · ISC2 CC and CCNA on the roadmap.</p>
+                    <div class="module-meta">
+                        <span><strong>1</strong> in-progress</span>
+                        <span class="meta-divider"></span>
+                        <span>next: <strong>Sec+ Q2</strong></span>
+                    </div>
+                    <span class="module-cta">access module →</span>
+                </a>
+
+                <a href="research/index.html" class="module-card reveal" data-delay="240">
+                    <div class="module-head">
+                        <div class="module-icon purple">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg>
+                        </div>
+                        <span class="status-badge status-complete">PUBLISHING</span>
+                    </div>
+                    <h3>Research</h3>
+                    <p>Technical writeups on cloud security, TLS handshakes, and exploit mitigations.</p>
+                    <div class="module-meta">
+                        <span><strong>3</strong> writeups</span>
+                        <span class="meta-divider"></span>
+                        <span><strong>1</strong> draft</span>
+                    </div>
+                    <span class="module-cta">access module →</span>
+                </a>
+
+                <a href="case-studies/index.html" class="module-card reveal" data-delay="320">
+                    <div class="module-head">
+                        <div class="module-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                        </div>
+                        <span class="status-badge status-complete">ARCHIVED</span>
+                    </div>
+                    <h3>Case Studies</h3>
+                    <p>Equifax, Capital One, SolarWinds — real-world incident analysis.</p>
+                    <div class="module-meta">
+                        <span><strong>3</strong> cases</span>
+                        <span class="meta-divider"></span>
+                        <span>updated <strong>weekly</strong></span>
+                    </div>
+                    <span class="module-cta">access module →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Activity Feed + Capability Radar ── -->
+    <section class="section">
+        <div class="container">
+            <div class="split-grid">
+                <div class="panel reveal">
+                    <div class="panel-head">
+                        <h3><span class="led led-green pulsing"></span> LIVE ACTIVITY FEED</h3>
+                        <span class="panel-sub">tail -f ops.log</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="activity-feed">
+                            <div class="activity-row">
+                                <span class="activity-time">19:42:01</span>
+                                <span class="activity-tag tag-ok">OK</span>
+                                <span class="activity-msg">LAB_COMPLETE: Shellshock exploitation</span>
+                            </div>
+                            <div class="activity-row">
+                                <span class="activity-time">19:38:14</span>
+                                <span class="activity-tag tag-info">INFO</span>
+                                <span class="activity-msg">SCAN_START: sentinel-lite → aws-prod</span>
+                            </div>
+                            <div class="activity-row">
+                                <span class="activity-time">19:31:55</span>
+                                <span class="activity-tag tag-ok">OK</span>
+                                <span class="activity-msg">CTF_SOLVE: picoCTF "rsa-pop-quiz" [+200]</span>
+                            </div>
+                            <div class="activity-row">
+                                <span class="activity-time">19:28:03</span>
+                                <span class="activity-tag tag-warn">WARN</span>
+                                <span class="activity-msg">CERT_TARGET: Security+ window — 47d</span>
+                            </div>
+                            <div class="activity-row">
+                                <span class="activity-time">19:24:11</span>
+                                <span class="activity-tag tag-ok">OK</span>
+                                <span class="activity-msg">MODULE_PASS: SEED Crypto · PKI</span>
+                            </div>
+                            <div class="activity-row">
+                                <span class="activity-time">19:19:38</span>
+                                <span class="activity-tag tag-info">INFO</span>
+                                <span class="activity-msg">LOG_INGEST: 2,431 events parsed</span>
+                            </div>
+                            <div class="activity-row">
+                                <span class="activity-time">19:11:22</span>
+                                <span class="activity-tag tag-alert">ALERT</span>
+                                <span class="activity-msg">FINDING: S3 bucket public-read (sev: HIGH)</span>
+                            </div>
+                            <div class="activity-row">
+                                <span class="activity-time">19:05:09</span>
+                                <span class="activity-tag tag-ok">OK</span>
+                                <span class="activity-msg">WRITEUP_PUBLISHED: AWS S3 misconfig analysis</span>
+                            </div>
+                            <div class="activity-row">
+                                <span class="activity-time">18:58:46</span>
+                                <span class="activity-tag tag-info">INFO</span>
+                                <span class="activity-msg">ENUM_COMPLETE: nmap -sV 10.0.0.0/24</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel reveal" data-delay="120">
+                    <div class="panel-head">
+                        <h3>CAPABILITY RADAR</h3>
+                        <span class="panel-sub">// proficiency_map</span>
+                    </div>
+                    <div class="panel-body radar-wrap">
+                        <svg viewBox="0 0 300 300" class="radar" xmlns="http://www.w3.org/2000/svg" aria-label="Capability radar chart">
+                            <g class="radar-grid">
+                                <polygon points="150,128 169.05,139 169.05,161 150,172 130.95,161 130.95,139"/>
+                                <polygon points="150,106 188.11,128 188.11,172 150,194 111.89,172 111.89,128"/>
+                                <polygon points="150,84 207.16,117 207.16,183 150,216 92.84,183 92.84,117"/>
+                                <polygon points="150,62 226.21,106 226.21,194 150,238 73.79,194 73.79,106"/>
+                                <polygon points="150,40 245.26,95 245.26,205 150,260 54.74,205 54.74,95"/>
+                            </g>
+                            <g class="radar-axes">
+                                <line x1="150" y1="150" x2="150" y2="40"/>
+                                <line x1="150" y1="150" x2="245.26" y2="95"/>
+                                <line x1="150" y1="150" x2="245.26" y2="205"/>
+                                <line x1="150" y1="150" x2="150" y2="260"/>
+                                <line x1="150" y1="150" x2="54.74" y2="205"/>
+                                <line x1="150" y1="150" x2="54.74" y2="95"/>
+                            </g>
+                            <line class="radar-scan" x1="150" y1="150" x2="150" y2="40"/>
+                            <polygon class="radar-area" points="150,62 226.21,106 226.21,194 150,227 83.30,188.50 73.79,106"/>
+                            <g class="radar-points">
+                                <circle cx="150" cy="62" r="4"/>
+                                <circle cx="226.21" cy="106" r="4"/>
+                                <circle cx="226.21" cy="194" r="4"/>
+                                <circle cx="150" cy="227" r="4"/>
+                                <circle cx="83.30" cy="188.50" r="4"/>
+                                <circle cx="73.79" cy="106" r="4"/>
+                            </g>
+                            <g class="radar-labels">
+                                <text x="150" y="26" text-anchor="middle">WEB</text>
+                                <text x="252" y="92" text-anchor="start">NETWORK</text>
+                                <text x="252" y="212" text-anchor="start">CLOUD</text>
+                                <text x="150" y="282" text-anchor="middle">SYSTEMS</text>
+                                <text x="48" y="212" text-anchor="end">CRYPTO</text>
+                                <text x="48" y="92" text-anchor="end">TOOLING</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Arsenal ── -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Arsenal // Tools</h2>
+            <div class="arsenal-grid reveal">
+                <span class="arsenal-chip">nmap</span>
+                <span class="arsenal-chip">burp-suite</span>
+                <span class="arsenal-chip">wireshark</span>
+                <span class="arsenal-chip">sqlmap</span>
+                <span class="arsenal-chip">john</span>
+                <span class="arsenal-chip">hashcat</span>
+                <span class="arsenal-chip">openssl</span>
+                <span class="arsenal-chip">gdb</span>
+                <span class="arsenal-chip">objdump</span>
+                <span class="arsenal-chip">python</span>
+                <span class="arsenal-chip">bash</span>
+                <span class="arsenal-chip">aws-cli</span>
+                <span class="arsenal-chip">boto3</span>
+                <span class="arsenal-chip">docker</span>
+                <span class="arsenal-chip">git</span>
+                <span class="arsenal-chip">gns3</span>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">&copy; 2026 Cristian Diaz · sys.status: <span style="color:var(--cyber-primary)">online</span></div>
+    </footer>
+
+    <script src="../assets/js/nav.js"></script>
+    <script src="../assets/js/fx.js"></script>
+</body>
+</html>

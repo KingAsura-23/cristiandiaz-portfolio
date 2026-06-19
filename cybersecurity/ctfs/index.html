@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Challenges — Cristian Diaz</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+</head>
+<body class="cyber-page">
+
+    <nav id="site-nav" class="site-nav" data-root="../../" data-page="cyber"></nav>
+
+    <header class="page-header container reveal">
+        <h1>CTF Challenges</h1>
+        <p>Cross-platform capture-the-flag progress &amp; per-platform breakdown</p>
+    </header>
+
+    <!-- ── Total summary ── -->
+    <section class="section" style="padding-top: 1rem;">
+        <div class="container">
+            <div class="ctf-summary reveal">
+                <div class="ctf-total">
+                    <span class="ctf-total-label">TOTAL_SOLVED</span>
+                    <span class="ctf-total-value"><span data-count="107">0</span></span>
+                    <span class="ctf-total-sub">across 5 platforms</span>
+                </div>
+                <div class="ctf-meta">
+                    <div class="meta-cell">
+                        <span class="meta-label">RECENT_SOLVE</span>
+                        <span class="meta-value accent">today</span>
+                    </div>
+                    <div class="meta-cell">
+                        <span class="meta-label">TOP_PLATFORM</span>
+                        <span class="meta-value">CyLab Academy</span>
+                    </div>
+                    <div class="meta-cell">
+                        <span class="meta-label">FAVORITE_CAT</span>
+                        <span class="meta-value">reverse · web</span>
+                    </div>
+                    <div class="meta-cell">
+                        <span class="meta-label">CURRENT_STREAK</span>
+                        <span class="meta-value">7 days</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="distribution-wrap reveal" data-delay="100">
+                <p class="distribution-title">// platform distribution</p>
+                <div class="distribution">
+                    <div class="distribution-seg pico"  style="width: 77.57%"></div>
+                    <div class="distribution-seg thm"   style="width: 11.21%"></div>
+                    <div class="distribution-seg otw"   style="width: 7.48%"></div>
+                    <div class="distribution-seg pwn"   style="width: 2.80%"></div>
+                    <div class="distribution-seg other" style="width: 0.94%"></div>
+                </div>
+                <div class="distribution-legend">
+                    <span class="distribution-legend-item pico">CyLab Academy<strong>83</strong></span>
+                    <span class="distribution-legend-item thm">TryHackMe<strong>12</strong></span>
+                    <span class="distribution-legend-item otw">OverTheWire<strong>8</strong></span>
+                    <span class="distribution-legend-item pwn">pwn.college<strong>3</strong></span>
+                    <span class="distribution-legend-item other">Others<strong>1</strong></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Platform Breakdown ── -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">Platform Breakdown</h2>
+            <div class="kpi-grid">
+
+                <div class="kpi-card reveal" data-delay="0">
+                    <div class="kpi-header">
+                        <span class="platform-row">
+                            <span class="platform-mark">C</span>
+                            <span class="platform-name">CyLab Academy</span>
+                        </span>
+                        <span class="status-badge status-progress">ACTIVE</span>
+                    </div>
+                    <span class="kpi-value"><span data-count="83">0</span><span class="difficulty-of">/ 509</span></span>
+                    <div class="progress-track"><div class="progress-fill" data-fill="16"></div></div>
+                    <div class="platform-tags">
+                        <span class="tag cyber">Reverse</span>
+                        <span class="tag cyber">Web</span>
+                        <span class="tag cyber">General</span>
+                        <span class="tag cyber">Binary</span>
+                    </div>
+                    <span class="kpi-foot">76 easy · 7 medium · 0 hard · 16% of pool</span>
+                </div>
+
+                <div class="kpi-card reveal" data-delay="80">
+                    <div class="kpi-header">
+                        <span class="platform-row">
+                            <span class="platform-mark thm">T</span>
+                            <span class="platform-name">TryHackMe</span>
+                        </span>
+                        <span class="status-badge status-progress">IN-PROGRESS</span>
+                    </div>
+                    <span class="kpi-value cyan"><span data-count="12">0</span></span>
+                    <div class="progress-track"><div class="progress-fill cyan" data-fill="48"></div></div>
+                    <div class="platform-tags">
+                        <span class="tag">Recon</span>
+                        <span class="tag">Privesc</span>
+                        <span class="tag">AD</span>
+                    </div>
+                    <span class="kpi-foot">Jr Pen Tester path · 48% complete</span>
+                </div>
+
+                <div class="kpi-card reveal" data-delay="160">
+                    <div class="kpi-header">
+                        <span class="platform-row">
+                            <span class="platform-mark otw">O</span>
+                            <span class="platform-name">OverTheWire</span>
+                        </span>
+                        <span class="status-badge status-progress">LVL 13</span>
+                    </div>
+                    <span class="kpi-value purple"><span data-count="8">0</span></span>
+                    <div class="progress-track"><div class="progress-fill purple" data-fill="50"></div></div>
+                    <div class="platform-tags">
+                        <span class="tag purple">Linux</span>
+                        <span class="tag purple">Scripting</span>
+                        <span class="tag purple">Auth</span>
+                    </div>
+                    <span class="kpi-foot">Bandit lvl 8 → 13 · Natas in queue</span>
+                </div>
+
+                <div class="kpi-card reveal" data-delay="240">
+                    <div class="kpi-header">
+                        <span class="platform-row">
+                            <span class="platform-mark pwn">w</span>
+                            <span class="platform-name">pwn.college</span>
+                        </span>
+                        <span class="status-badge status-progress">DOJO</span>
+                    </div>
+                    <span class="kpi-value warn"><span data-count="3">0</span></span>
+                    <div class="progress-track"><div class="progress-fill warn" data-fill="22"></div></div>
+                    <div class="platform-tags">
+                        <span class="tag warn">Binary</span>
+                        <span class="tag warn">Shellcode</span>
+                        <span class="tag warn">ROP</span>
+                    </div>
+                    <span class="kpi-foot">Intro to Cybersecurity dojo · ASU</span>
+                </div>
+
+                <div class="kpi-card reveal" data-delay="320">
+                    <div class="kpi-header">
+                        <span class="platform-row">
+                            <span class="platform-mark other">+</span>
+                            <span class="platform-name">Others</span>
+                        </span>
+                        <span class="status-badge status-planned">EXPLORING</span>
+                    </div>
+                    <span class="kpi-value muted"><span data-count="1">0</span></span>
+                    <div class="progress-track"><div class="progress-fill muted" data-fill="10"></div></div>
+                    <div class="platform-tags">
+                        <span class="tag">HackTheBox</span>
+                        <span class="tag">CryptoHack</span>
+                        <span class="tag">root-me</span>
+                    </div>
+                    <span class="kpi-foot">HTB starting · CSAW on roadmap</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CyLab Academy Detailed Progress (Challenge Completion + Skill Radar) ── -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title reveal">CyLab Academy · Detailed Progress</h2>
+            <p class="section-intro reveal">// live snapshot of my picoCTF / CyLab Academy account</p>
+
+            <div class="split-grid">
+
+                <!-- Challenge Completion -->
+                <div class="panel reveal">
+                    <div class="panel-head">
+                        <h3><span class="led led-green pulsing"></span> CHALLENGE COMPLETION</h3>
+                        <span class="panel-sub">// difficulty breakdown</span>
+                    </div>
+                    <div class="completion-body">
+                        <div class="completion-header">
+                            <div class="completion-total-wrap">
+                                <span class="completion-total"><span data-count="83">0</span></span>
+                                <span class="completion-label">Total solved · <span class="completion-pct">16%</span> of full pool</span>
+                            </div>
+                        </div>
+
+                        <div class="completion-overall">
+                            <div class="progress-track"><div class="progress-fill" data-fill="16"></div></div>
+                            <div class="completion-overall-meta">
+                                <span><strong>83</strong> / 509 challenges</span>
+                                <span>509 in pool</span>
+                            </div>
+                        </div>
+
+                        <div class="difficulty-legend">
+                            <div class="difficulty-cell easy">
+                                <div class="difficulty-cell-head">
+                                    <span class="difficulty-label">Easy</span>
+                                    <span class="difficulty-pct">78%</span>
+                                </div>
+                                <span class="difficulty-fraction">
+                                    <span class="difficulty-count" data-count="76">0</span><span class="difficulty-of">/ 97</span>
+                                </span>
+                                <div class="progress-track"><div class="progress-fill" data-fill="78"></div></div>
+                            </div>
+                            <div class="difficulty-cell medium">
+                                <div class="difficulty-cell-head">
+                                    <span class="difficulty-label">Medium</span>
+                                    <span class="difficulty-pct">3%</span>
+                                </div>
+                                <span class="difficulty-fraction">
+                                    <span class="difficulty-count" data-count="7">0</span><span class="difficulty-of">/ 276</span>
+                                </span>
+                                <div class="progress-track"><div class="progress-fill warn" data-fill="3"></div></div>
+                            </div>
+                            <div class="difficulty-cell hard">
+                                <div class="difficulty-cell-head">
+                                    <span class="difficulty-label">Hard</span>
+                                    <span class="difficulty-pct">0%</span>
+                                </div>
+                                <span class="difficulty-fraction">
+                                    <span class="difficulty-count" data-count="0">0</span><span class="difficulty-of">/ 136</span>
+                                </span>
+                                <div class="progress-track"><div class="progress-fill red" data-fill="0"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Analysis radar (7 axes) -->
+                <div class="panel reveal" data-delay="120">
+                    <div class="panel-head">
+                        <h3>SKILL ANALYSIS</h3>
+                        <span class="panel-sub">// category mastery</span>
+                    </div>
+                    <div class="panel-body radar-wrap">
+                        <svg viewBox="0 0 300 300" class="radar" xmlns="http://www.w3.org/2000/svg" aria-label="CyLab Academy skill radar">
+                            <g class="radar-grid">
+                                <polygon points="150,128 167.20,136.28 171.45,154.90 159.55,169.82 140.45,169.82 128.55,154.90 132.80,136.28"/>
+                                <polygon points="150,106 184.40,122.57 192.90,159.79 169.09,189.64 130.91,189.64 107.10,159.79 115.60,122.57"/>
+                                <polygon points="150,84 201.60,108.85 214.34,164.69 178.64,209.46 121.36,209.46 85.66,164.69 98.40,108.85"/>
+                                <polygon points="150,62 218.80,95.13 235.79,169.58 188.18,229.28 111.82,229.28 64.21,169.58 81.20,95.13"/>
+                                <polygon points="150,40 236.00,81.42 257.24,174.48 197.73,249.10 102.27,249.10 42.76,174.48 64.00,81.42"/>
+                            </g>
+                            <g class="radar-axes">
+                                <line x1="150" y1="150" x2="150" y2="40"/>
+                                <line x1="150" y1="150" x2="236.00" y2="81.42"/>
+                                <line x1="150" y1="150" x2="257.24" y2="174.48"/>
+                                <line x1="150" y1="150" x2="197.73" y2="249.10"/>
+                                <line x1="150" y1="150" x2="102.27" y2="249.10"/>
+                                <line x1="150" y1="150" x2="42.76" y2="174.48"/>
+                                <line x1="150" y1="150" x2="64.00" y2="81.42"/>
+                            </g>
+                            <line class="radar-scan" x1="150" y1="150" x2="150" y2="40"/>
+                            <polygon class="radar-area" points="150,62 158.60,143.14 203.62,162.24 178.64,209.46 107.04,239.19 42.76,174.48 81.20,95.13"/>
+                            <g class="radar-points">
+                                <circle cx="150"    cy="62"     r="4"/>
+                                <circle cx="158.60" cy="143.14" r="4"/>
+                                <circle cx="203.62" cy="162.24" r="4"/>
+                                <circle cx="178.64" cy="209.46" r="4"/>
+                                <circle cx="107.04" cy="239.19" r="4"/>
+                                <circle cx="42.76"  cy="174.48" r="4"/>
+                                <circle cx="81.20"  cy="95.13"  r="4"/>
+                            </g>
+                            <g class="radar-labels">
+                                <text x="150" y="22" text-anchor="middle">BINARY</text>
+                                <text x="250" y="70" text-anchor="start">CHAIN</text>
+                                <text x="275" y="178" text-anchor="start">CRYPTO</text>
+                                <text x="206" y="265" text-anchor="start">FORENSIC</text>
+                                <text x="94"  y="265" text-anchor="end">GENERAL</text>
+                                <text x="25"  y="178" text-anchor="end">REVERSE</text>
+                                <text x="50"  y="70" text-anchor="end">WEB</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Recent Solves ── -->
+    <section class="section">
+        <div class="container">
+            <div class="panel reveal">
+                <div class="panel-head">
+                    <h3><span class="led led-green pulsing"></span> RECENT SOLVES</h3>
+                    <span class="panel-sub">tail -f ctf.log</span>
+                </div>
+                <div class="panel-body">
+                    <div class="activity-feed">
+                        <div class="activity-row solve-row">
+                            <span class="activity-time">19:38</span>
+                            <span class="activity-tag tag-ok">SOLVE</span>
+                            <span class="activity-msg">
+                                <span class="solve-platform">CyLab Academy</span>
+                                <span class="solve-title">"rsa-pop-quiz"</span>
+                                <span class="solve-cat">crypto · easy</span>
+                            </span>
+                            <span class="solve-pts">+200</span>
+                        </div>
+                        <div class="activity-row solve-row">
+                            <span class="activity-time">14:22</span>
+                            <span class="activity-tag tag-ok">SOLVE</span>
+                            <span class="activity-msg">
+                                <span class="solve-platform thm">TryHackMe</span>
+                                <span class="solve-title">"Blue" room</span>
+                                <span class="solve-cat">ad / smb</span>
+                            </span>
+                            <span class="solve-pts">+100</span>
+                        </div>
+                        <div class="activity-row solve-row">
+                            <span class="activity-time">11:05</span>
+                            <span class="activity-tag tag-ok">SOLVE</span>
+                            <span class="activity-msg">
+                                <span class="solve-platform otw">OverTheWire</span>
+                                <span class="solve-title">bandit lvl 12 → 13</span>
+                                <span class="solve-cat">linux</span>
+                            </span>
+                            <span class="solve-pts">+1</span>
+                        </div>
+                        <div class="activity-row solve-row">
+                            <span class="activity-time">08:47</span>
+                            <span class="activity-tag tag-ok">SOLVE</span>
+                            <span class="activity-msg">
+                                <span class="solve-platform">CyLab Academy</span>
+                                <span class="solve-title">"WhitePages"</span>
+                                <span class="solve-cat">forensics · medium</span>
+                            </span>
+                            <span class="solve-pts">+200</span>
+                        </div>
+                        <div class="activity-row solve-row">
+                            <span class="activity-time">2d ago</span>
+                            <span class="activity-tag tag-ok">SOLVE</span>
+                            <span class="activity-msg">
+                                <span class="solve-platform pwn">pwn.college</span>
+                                <span class="solve-title">"gdb-fu" challenge</span>
+                                <span class="solve-cat">binary</span>
+                            </span>
+                            <span class="solve-pts">+1</span>
+                        </div>
+                        <div class="activity-row solve-row">
+                            <span class="activity-time">3d ago</span>
+                            <span class="activity-tag tag-ok">SOLVE</span>
+                            <span class="activity-msg">
+                                <span class="solve-platform">CyLab Academy</span>
+                                <span class="solve-title">"login-cookie"</span>
+                                <span class="solve-cat">web · easy</span>
+                            </span>
+                            <span class="solve-pts">+100</span>
+                        </div>
+                        <div class="activity-row solve-row">
+                            <span class="activity-time">4d ago</span>
+                            <span class="activity-tag tag-ok">SOLVE</span>
+                            <span class="activity-msg">
+                                <span class="solve-platform">CyLab Academy</span>
+                                <span class="solve-title">"vault-door-1"</span>
+                                <span class="solve-cat">reverse · easy</span>
+                            </span>
+                            <span class="solve-pts">+100</span>
+                        </div>
+                        <div class="activity-row solve-row">
+                            <span class="activity-time">5d ago</span>
+                            <span class="activity-tag tag-ok">SOLVE</span>
+                            <span class="activity-msg">
+                                <span class="solve-platform otw">OverTheWire</span>
+                                <span class="solve-title">bandit lvl 11 → 12</span>
+                                <span class="solve-cat">linux</span>
+                            </span>
+                            <span class="solve-pts">+1</span>
+                        </div>
+                        <div class="activity-row solve-row">
+                            <span class="activity-time">6d ago</span>
+                            <span class="activity-tag tag-ok">SOLVE</span>
+                            <span class="activity-msg">
+                                <span class="solve-platform other">HackTheBox</span>
+                                <span class="solve-title">"Lame" machine</span>
+                                <span class="solve-cat">smb</span>
+                            </span>
+                            <span class="solve-pts">+20</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Back / nav ── -->
+    <section class="section" style="padding-top: 1rem;">
+        <div class="container reveal">
+            <a href="../index.html" class="btn btn-outline">← Back to Dashboard</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">&copy; 2026 Cristian Diaz · ctf.log up to date</div>
+    </footer>
+
+    <script src="../../assets/js/nav.js"></script>
+    <script src="../../assets/js/fx.js"></script>
+</body>
+</html>

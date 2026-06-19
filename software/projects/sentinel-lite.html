@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel-Lite — Cristian Diaz</title>
+    <link rel="stylesheet" href="../../assets/css/global.css">
+</head>
+<body class="software-page">
+
+    <nav id="site-nav" class="site-nav" data-root="../../" data-page="software"></nav>
+
+    <header class="page-header container reveal">
+        <h1>Sentinel-Lite</h1>
+        <p>AWS Security Scanner</p>
+    </header>
+
+    <div class="container project-detail">
+        <section class="reveal">
+            <h2>Problem</h2>
+            <p>
+                Cloud environments grow fast, and misconfigurations — public S3 buckets, overly permissive
+                IAM policies, open security groups — are a leading cause of data breaches. Manual audits
+                don't scale.
+            </p>
+        </section>
+
+        <section class="reveal">
+            <h2>Solution</h2>
+            <p>
+                Sentinel-Lite is a Python CLI tool that connects to AWS via boto3 and scans IAM policies,
+                S3 bucket ACLs, and security group rules. It outputs a structured JSON report highlighting
+                critical findings ranked by severity.
+            </p>
+        </section>
+
+        <section class="reveal">
+            <h2>Tech Stack</h2>
+            <ul class="tech-stack">
+                <li>Python</li>
+                <li>boto3</li>
+                <li>AWS IAM</li>
+                <li>AWS S3</li>
+                <li>pytest</li>
+                <li>GitHub Actions</li>
+            </ul>
+        </section>
+
+        <section class="reveal">
+            <h2>Screenshots</h2>
+            <div class="screenshot-placeholder">CLI scan output — add screenshot here</div>
+        </section>
+
+        <section class="reveal">
+            <h2>Architecture</h2>
+            <div class="screenshot-placeholder">Scanner module diagram — add architecture diagram here</div>
+        </section>
+
+        <section class="reveal">
+            <h2>Challenges</h2>
+            <p>
+                Handling paginated AWS API responses, normalizing IAM policy documents across multiple
+                statement formats, and writing meaningful severity scoring without false-positive fatigue.
+            </p>
+        </section>
+
+        <section class="reveal">
+            <h2>What I Learned</h2>
+            <p>
+                Deep understanding of AWS IAM least-privilege principles, S3 public access block settings,
+                and how to structure a modular scanner that can grow into a full security platform.
+            </p>
+        </section>
+
+        <div class="detail-actions reveal">
+            <a href="https://github.com" class="btn btn-primary" target="_blank" rel="noopener">
+                GitHub
+                <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a href="../index.html" class="btn btn-outline">All Projects</a>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">&copy; 2026 Cristian Diaz</div>
+    </footer>
+
+    <script src="../../assets/js/nav.js"></script>
+    <script src="../../assets/js/fx.js"></script>
+</body>
+</html>
