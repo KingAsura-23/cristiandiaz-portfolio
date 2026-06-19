@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Crypto Challenge — Writeup — Cristian Diaz</title>
+    <link rel="stylesheet" href="../../../assets/css/global.css">
+</head>
+<body class="cyber-page">
+
+    <nav id="site-nav" class="site-nav" data-root="../../../" data-page="cyber"></nav>
+
+    <header class="container" style="padding-top: 2rem;">
+        <div class="writeup-breadcrumb reveal">
+            <a href="../../index.html">cybersecurity</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <a href="../index.html">ctfs</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <a href="index.html">writeups</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <span>sample-crypto-challenge</span>
+        </div>
+
+        <section class="writeup-hero reveal">
+            <div class="writeup-hero-head">
+                <span class="writeup-platform">
+                    <span class="platform-mark">C</span>
+                    CyLab Academy
+                </span>
+                <span class="diff-badge easy">Easy</span>
+                <span class="tag cyber">crypto</span>
+            </div>
+            <h1>Sample Crypto Challenge</h1>
+            <p class="writeup-hero-sub">
+                One-line synopsis: a short description of what the challenge gave you, what made it interesting, and what the goal was. Replace this with your real challenge text.
+            </p>
+        </section>
+
+        <div class="writeup-info reveal" data-delay="80">
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Platform</span>
+                <span class="writeup-info-value">CyLab Academy</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Category</span>
+                <span class="writeup-info-value">Crypto</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Difficulty</span>
+                <span class="writeup-info-value" style="color: var(--cyber-primary);">Easy</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Points</span>
+                <span class="writeup-info-value">200</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Solved</span>
+                <span class="writeup-info-value">2026-06-15</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── Article body ── -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <article class="writeup-article reveal" data-delay="120">
+
+                <h2>Challenge</h2>
+                <p>
+                    Reproduce or paraphrase the challenge prompt here. Include any files, hints, or starting URLs you were given. Keep it short &mdash; just enough context that a reader without an account understands what you were facing.
+                </p>
+
+                <blockquote>
+                    "Original challenge description, quoted from the platform. Useful so readers see the exact wording."
+                </blockquote>
+
+                <h2>Recon</h2>
+                <p>
+                    First thing I did was inspect the given file / endpoint. Describe what jumped out: file type, headers, encoding, unusual constants, weird key sizes, etc.
+                </p>
+
+                <pre data-lang="bash"><code>file challenge.bin
+strings challenge.bin | head -20
+xxd challenge.bin | head</code></pre>
+
+                <p>
+                    Findings: list out what you discovered &mdash; signatures, magic bytes, encoded blobs, etc. Use <code>inline code</code> for short snippets, fenced blocks for longer ones.
+                </p>
+
+                <div class="writeup-shot">
+                    Drop a screenshot here later (replace this div with an &lt;img src="..."&gt; once you have one).
+                </div>
+
+                <h2>Approach</h2>
+                <p>
+                    Walk through your reasoning. What hypotheses did you form? What did you try first, and why? This is the part that makes the writeup valuable &mdash; recruiters and peers want to see the thought process, not just the final command.
+                </p>
+
+                <h3>First attempt &mdash; what didn't work</h3>
+                <p>
+                    Describe the dead-end. Showing that you tried things and reasoned about why they failed is way more impressive than pretending you went straight to the answer.
+                </p>
+
+                <h3>The pivot</h3>
+                <p>
+                    Explain the realization that unstuck you. Was it a key insight about the algorithm? A pattern you spotted in the output? A hint someone dropped in the official Discord?
+                </p>
+
+                <h2>Solution</h2>
+                <p>
+                    Walk through the working solve step by step.
+                </p>
+
+                <pre data-lang="python"><code>from Crypto.Util.number import long_to_bytes
+
+n = 0x...
+e = 65537
+c = 0x...
+
+# Sample exploit code &mdash; replace with your actual solve
+p = ...
+q = ...
+phi = (p - 1) * (q - 1)
+d = pow(e, -1, phi)
+m = pow(c, d, n)
+print(long_to_bytes(m))</code></pre>
+
+                <p>
+                    Explain what each block of the solve does. If you used a public tool (Cyberchef, RsaCtfTool, etc.) link it and explain why it was the right pick.
+                </p>
+
+                <div class="writeup-flag">
+                    <span class="writeup-flag-label">FLAG &raquo;</span>
+                    <span class="writeup-flag-value">picoCTF{REDACTED_REPLACE_WITH_YOUR_FLAG}</span>
+                </div>
+
+                <h2>Lessons Learned</h2>
+                <ul>
+                    <li>One sentence on the underlying technique / vuln class &mdash; the thing a recruiter scanning this would learn.</li>
+                    <li>A tool or technique you picked up doing this challenge.</li>
+                    <li>What you'd do differently / faster next time you see this pattern.</li>
+                </ul>
+
+                <h2>References</h2>
+                <ul>
+                    <li><a href="#" rel="noopener">Related blog post / paper / writeup that helped</a></li>
+                    <li><a href="#" rel="noopener">Tool documentation</a></li>
+                </ul>
+
+            </article>
+
+            <!-- Prev/Next nav -->
+            <nav class="writeup-nav reveal" data-delay="160" aria-label="writeup navigation">
+                <a href="index.html" class="writeup-nav-link">
+                    <span class="writeup-nav-label">&larr; all writeups</span>
+                    <span class="writeup-nav-title">Back to index</span>
+                </a>
+                <a href="writeup-sample-2.html" class="writeup-nav-link next">
+                    <span class="writeup-nav-label">next writeup &rarr;</span>
+                    <span class="writeup-nav-title">Sample Reverse Engineering</span>
+                </a>
+            </nav>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">&copy; 2026 Cristian Diaz &middot; writeup &middot; flags sanitized</div>
+    </footer>
+
+    <script src="../../../assets/js/nav.js"></script>
+    <script src="../../../assets/js/fx.js"></script>
+</body>
+</html>

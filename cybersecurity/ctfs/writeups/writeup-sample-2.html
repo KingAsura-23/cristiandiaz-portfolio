@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Reverse Engineering — Writeup — Cristian Diaz</title>
+    <link rel="stylesheet" href="../../../assets/css/global.css">
+</head>
+<body class="cyber-page">
+
+    <nav id="site-nav" class="site-nav" data-root="../../../" data-page="cyber"></nav>
+
+    <header class="container" style="padding-top: 2rem;">
+        <div class="writeup-breadcrumb reveal">
+            <a href="../../index.html">cybersecurity</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <a href="../index.html">ctfs</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <a href="index.html">writeups</a>
+            <span class="writeup-breadcrumb-sep">/</span>
+            <span>sample-reverse-engineering</span>
+        </div>
+
+        <section class="writeup-hero reveal">
+            <div class="writeup-hero-head">
+                <span class="writeup-platform">
+                    <span class="platform-mark">C</span>
+                    CyLab Academy
+                </span>
+                <span class="diff-badge medium">Medium</span>
+                <span class="tag cyber">reverse</span>
+            </div>
+            <h1>Sample Reverse Engineering Challenge</h1>
+            <p class="writeup-hero-sub">
+                Static analysis in Ghidra, identifying the check routine, and crafting input that satisfies the validation without brute-forcing. Replace this synopsis with your real notes.
+            </p>
+        </section>
+
+        <div class="writeup-info reveal" data-delay="80">
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Platform</span>
+                <span class="writeup-info-value">CyLab Academy</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Category</span>
+                <span class="writeup-info-value">Reverse</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Difficulty</span>
+                <span class="writeup-info-value" style="color: var(--cyber-warn);">Medium</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Points</span>
+                <span class="writeup-info-value">300</span>
+            </div>
+            <div class="writeup-info-cell">
+                <span class="writeup-info-label">Solved</span>
+                <span class="writeup-info-value">2026-06-10</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── Article body ── -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <article class="writeup-article reveal" data-delay="120">
+
+                <h2>Challenge</h2>
+                <p>
+                    Given an ELF binary that prompts for a password and prints "Access granted" if the input is correct. No source. No symbols stripped beyond <code>main</code>. Replace with your real challenge text.
+                </p>
+
+                <pre data-lang="bash"><code>./challenge
+Enter the secret: hunter2
+Wrong.</code></pre>
+
+                <h2>Recon</h2>
+                <p>
+                    Standard first-look on any binary:
+                </p>
+
+                <pre data-lang="bash"><code>file ./challenge
+checksec --file=./challenge
+strings ./challenge | grep -i flag
+nm ./challenge | head</code></pre>
+
+                <p>
+                    Notes: 64-bit ELF, no PIE, no canaries, partial RELRO. <code>strings</code> turned up some hex blobs but no obvious flag. Promising.
+                </p>
+
+                <h2>Static Analysis</h2>
+                <p>
+                    Loaded the binary into Ghidra and jumped to <code>main</code>. The decompiler showed a per-character XOR check against a hardcoded buffer:
+                </p>
+
+                <pre data-lang="c"><code>// Decompiled - simplified
+int main(void) {
+    char input[64];
+    char key[] = "\x37\x21\x5c\x...";
+    printf("Enter the secret: ");
+    fgets(input, 64, stdin);
+    for (int i = 0; i &lt; strlen(input); i++) {
+        if ((input[i] ^ 0x42) != key[i]) {
+            puts("Wrong.");
+            return 1;
+        }
+    }
+    puts("Access granted!");
+    system("/bin/sh");
+    return 0;
+}</code></pre>
+
+                <div class="writeup-shot">
+                    Drop the Ghidra decompile screenshot here once you have one.
+                </div>
+
+                <h2>Approach</h2>
+                <p>
+                    Once I saw it was a straight XOR check against a constant key, the solve is just inversion: <code>input[i] = key[i] ^ 0x42</code>. No need to run it under <code>gdb</code> at all.
+                </p>
+
+                <h3>What I tried first</h3>
+                <p>
+                    Walk through the path that wasn't optimal. e.g. "I initially tried <code>ltrace</code> hoping the compare would be in <code>strcmp</code> &mdash; it wasn't because the check is character-by-character in a loop."
+                </p>
+
+                <h3>The pivot</h3>
+                <p>
+                    Spotting the constant <code>0x42</code> XOR pattern in Ghidra was the moment. From there it's a one-liner.
+                </p>
+
+                <h2>Solution</h2>
+                <pre data-lang="python"><code>key = bytes.fromhex("37215c...")  # extracted from .rodata
+flag = bytes(b ^ 0x42 for b in key)
+print(flag.decode())</code></pre>
+
+                <p>
+                    Piped it back into the binary:
+                </p>
+
+                <pre data-lang="bash"><code>python3 solve.py | ./challenge</code></pre>
+
+                <div class="writeup-flag">
+                    <span class="writeup-flag-label">FLAG &raquo;</span>
+                    <span class="writeup-flag-value">picoCTF{REDACTED_REPLACE_WITH_YOUR_FLAG}</span>
+                </div>
+
+                <h2>Lessons Learned</h2>
+                <ul>
+                    <li>Cheap XOR "encryption" against a constant is trivial &mdash; if I see a single repeating byte in a check loop, just invert.</li>
+                    <li>Ghidra's decompiler reads close enough to C that you can often skip dynamic analysis entirely on this kind of crackme.</li>
+                    <li>Pull <code>.rodata</code> early &mdash; constants are often the answer.</li>
+                </ul>
+
+                <h2>References</h2>
+                <ul>
+                    <li><a href="https://ghidra-sre.org/" rel="noopener">Ghidra &mdash; NSA reverse engineering framework</a></li>
+                    <li><a href="https://github.com/slimm609/checksec.sh" rel="noopener">checksec.sh</a></li>
+                </ul>
+
+            </article>
+
+            <!-- Prev/Next nav -->
+            <nav class="writeup-nav reveal" data-delay="160" aria-label="writeup navigation">
+                <a href="writeup-sample-1.html" class="writeup-nav-link">
+                    <span class="writeup-nav-label">&larr; previous writeup</span>
+                    <span class="writeup-nav-title">Sample Crypto Challenge</span>
+                </a>
+                <a href="index.html" class="writeup-nav-link next">
+                    <span class="writeup-nav-label">all writeups &rarr;</span>
+                    <span class="writeup-nav-title">Back to index</span>
+                </a>
+            </nav>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">&copy; 2026 Cristian Diaz &middot; writeup &middot; flags sanitized</div>
+    </footer>
+
+    <script src="../../../assets/js/nav.js"></script>
+    <script src="../../../assets/js/fx.js"></script>
+</body>
+</html>
